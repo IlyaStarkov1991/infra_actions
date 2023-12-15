@@ -54,7 +54,7 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           push: true
-          tags: ilyastarkov/infra:v1
+          tags: ilyastarkov/infra:latest
 
   deploy:
     runs-on: ubuntu-latest
@@ -68,7 +68,7 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           script: |
             # Выполняет pull образа с DockerHub
-            sudo docker pull ilyastarkov/infra:v1
+            sudo docker pull ilyastarkov/infra:latest
             #остановка всех контейнеров
             sudo docker stop $(sudo docker ps -a -q)
-            sudo docker run --rm -d -p 5000:5000 ilyastarkov/infra:v1
+            sudo docker run --rm -d -p 5000:5000 ilyastarkov/infra:latest
